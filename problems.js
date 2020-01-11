@@ -26,8 +26,9 @@ function fibCount() {
 
 
 //project euler #3: What is the largest prime factor of the number 600851475143 ?
-function gPrimeFactor() {
-	let num = 600851475143;
+function gPrimeFactor(num) {
+	let num = num;
+	// let num = 600851475143;
 	let marker = false;
 	let array = [];
 	let n = 2;
