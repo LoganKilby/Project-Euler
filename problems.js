@@ -26,9 +26,9 @@ function fibCount() {
 
 
 //project euler #3: What is the largest prime factor of the number 600851475143 ?
-function gPrimeFactor(num) {
-	let num = num;
-	// let num = 600851475143;
+function primeFactors(arg) {
+	let num = arg;
+	//let num = 600851475143;
 	let marker = false;
 	let array = [];
 	let n = 2;
@@ -52,24 +52,43 @@ function gPrimeFactor(num) {
 		}
 	}
 
-	//the current array happens to be the prime factorization of num, but in a general case we would need to do more work with array to find the prime factorization
-
-	return Math.max(...array);
-
-
-	//If we knew the number of divisors beforehand, the process would be shorter, but I leanred that we would need the prime factorization to know that:
-	// "In general, if you have the prime factorization of the number n, then to calculate how many divisors it has, you take all the exponents in the factorization, add 1 to each, and then multiply these "exponents + 1"s together."
-	//144 = (2^4)(3^2), so 5 x 3 = 15 divisors of 144.
-
-
-	console.log(marker);
-	console.log(num);
-	console.log(n);
+    /* chaning the code to return the prime factorization instead of 
+	only the solution to problem #2 so I can continue using this function in other places */
 	console.log(array);
+	return (array); 
+	//return Math.max(...array);
 }
 
 
 //Project euler #4:
 //A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
 //Find the largest palindrome made from the product of two 3-digit numbers.
+function palindrome_3() {
+	let x1 = 9801; //beginning of range; 99x99
+	let x2 = 998001; //end of range; 999x999
+	let selected_array; //used to parse numbers
+	let reversed_array;
+	let container = [];
 
+	//checking every number...
+	//todo: explore more efficient approach
+	for(let i = x2; i > x1; i--) {
+		reversed_array = [];
+		selected_array = Array.from(String(i), Number);
+
+		//creating reversed array
+		for (let j = selected_array.length - 1; j > -1; j--) {
+			reversed_array.push(selected_array[j]);
+		}
+
+		if (selected_array.join("") == reversed_array.join("")) {
+			console.log("found a palindrome!");
+			console.log(selected_array);
+			container.push(selected_array.join(""));
+			return;
+			//temporary return to stop looping
+		}
+
+		console.log("looking...");
+	}
+}
