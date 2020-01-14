@@ -54,7 +54,6 @@ function primeFactors(arg) {
 
     /* chaning the code to return the prime factorization instead of 
 	only the solution to problem #2 so I can continue using this function in other places */
-	console.log(array);
 	return (array); 
 	//return Math.max(...array);
 }
@@ -68,11 +67,13 @@ function palindrome_3() {
 	let x2 = 998001; //end of range; 999x999
 	let selected_array; //used to parse numbers
 	let reversed_array;
-	let container = [];
+	let container;
+	let final_check_container
 
 	//checking every number...
 	//todo: explore more efficient approach
 	for(let i = x2; i > x1; i--) {
+		container = [];
 		reversed_array = [];
 		selected_array = Array.from(String(i), Number);
 
@@ -81,13 +82,43 @@ function palindrome_3() {
 			reversed_array.push(selected_array[j]);
 		}
 
+		//logic when a palindrome is found
 		if (selected_array.join("") == reversed_array.join("")) {
 			console.log("found a palindrome!");
-			console.log(selected_array);
-			container.push(selected_array.join(""));
-			return;
-			//temporary return to stop looping
+			console.log(selected_array.join(""));
+			//getting prime factors from problem #3 function
+			container = primeFactors(parseInt(selected_array.join(""), 10));
+
+			//start doing math to see if can be multiplied by two three digit integers
+			switch (container) {
+				case: container.length < 3 {
+					//checking case when palindrome has two prime factors that are both three digits
+					if (container[0] < 999 & container[0] > 99) {
+						if (container[1] < 999 & container[i] > 99) {
+							console.log("Solution found");
+							console.log(selected_array);
+							return;
+						}
+					}
+				}
+
+				//todo: NOT FINISHED
+				case: container.length >= 3 {
+					for (let k = 0; k < container.length - 2; k++) {
+						if (container[container.length - 1] * container[k] < 1000) {
+							container[container.length - 1] = container[container.length - 1] * container[k];	
+						} else if (container[container.length - 2] * container[k] < 1000) {
+							container[container.length - 2] = container[container.length - 2] * container[k];
+						} else if (k == container[container.length - 3]){
+							console.log("Solution found");
+							console.log(selected_array);
+							return;
+						}
+					}
+				}
+			}
 		}
+
 
 		console.log("looking...");
 	}
