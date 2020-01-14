@@ -68,7 +68,6 @@ function palindrome_3() {
 	let selected_array; //used to parse numbers
 	let reversed_array;
 	let container;
-	let final_check_container
 
 	//checking every number...
 	//todo: explore more efficient approach
@@ -84,42 +83,42 @@ function palindrome_3() {
 
 		//logic when a palindrome is found
 		if (selected_array.join("") == reversed_array.join("")) {
-			console.log("found a palindrome!");
+			console.log("Found a palindrome!");
 			console.log(selected_array.join(""));
 			//getting prime factors from problem #3 function
 			container = primeFactors(parseInt(selected_array.join(""), 10));
 
 			//start doing math to see if can be multiplied by two three digit integers
-			switch (container) {
-				case: container.length < 3 {
-					//checking case when palindrome has two prime factors that are both three digits
-					if (container[0] < 999 & container[0] > 99) {
-						if (container[1] < 999 & container[i] > 99) {
-							console.log("Solution found");
-							console.log(selected_array);
-							return;
-						}
-					}
-				}
 
-				//todo: NOT FINISHED
-				case: container.length >= 3 {
-					for (let k = 0; k < container.length - 2; k++) {
-						if (container[container.length - 1] * container[k] < 1000) {
-							container[container.length - 1] = container[container.length - 1] * container[k];	
-						} else if (container[container.length - 2] * container[k] < 1000) {
-							container[container.length - 2] = container[container.length - 2] * container[k];
-						} else if (k == container[container.length - 3]){
-							console.log("Solution found");
-							console.log(selected_array);
-							return;
-						}
+			//checking case when palindrome has two prime factors that are both three digits
+			if (container.length < 3) {
+				if (container[0] < 999 & container[0] > 99) {
+					if (container[1] < 999 & container[i] > 99) {
+						console.log("*** Solution found ***");
+						console.log(selected_array.join(""));
+						return;
 					}
 				}
 			}
+
+			//checking all other cases
+			if (container.length >= 3) { 
+				for (let k = 0; k < container.length - 2; k++) {
+					if (container[container.length - 1] * container[k] > 1000) {
+						container[container.length - 2] = container[container.length - 2] * container[k];	
+					} else {
+						container[container.length - 1] = container[container.length - 1] * container[k];
+					}
+				}
+
+				if (container[container.length - 1] < 1000 && container[container.length - 2] < 1000) {
+					console.log("*** Solution found ***");
+					console.log(selected_array.join(""));
+					return;
+				}
+			}
 		}
-
-
-		console.log("looking...");
 	}
+
+	console.log("Looking...");
 }
