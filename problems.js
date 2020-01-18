@@ -14,13 +14,9 @@ function fibCount() {
 
 		}
 	}
-	console.log(fibs[fibs.length - 1]);
-	console.log(fibs[fibs.length - 2]);
-	console.log(evenArray);
 //summing array of even Fibbonaci numbers
 	sum = evenArray.reduce((x, y) => x + y, 0);
 	console.log(sum);
-
 	return sum;
 }
 
@@ -70,7 +66,7 @@ function palindrome_3() {
 	let container;
 
 	//checking every number...
-	//todo: explore a more efficient approach than stepping through range of numbers
+	//todo: explore a more efficient approach than stepping through entire range of numbers
 	for(let i = x2; i > x1; i--) {
 		container = [];
 		reversed_array = [];
@@ -105,7 +101,6 @@ function palindrome_3() {
 					}
 				}
 			}
-
 			//checking all other cases
 
 			/* Using the last two elements in the array
@@ -137,13 +132,11 @@ function palindrome_3() {
 //Problem #5:
 //2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
 //What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
-function LCM(x) {
+function LCM_PFM(x) {
 	//todo: Need to handle array and single integer arguments
 	//Using prime factor method because I have a function to factor primes:
-	let container = [];
 	let primes;
-	let counter;
-	let container2 = [];
+	let container = [];
 
 	if (Array.isArray(x)) {
 		console.log("Array received");
@@ -151,29 +144,16 @@ function LCM(x) {
 		console.log("Error, please pass LCM an array");
 		return;
 	}
+
 	for (let i = 0; i < x.length; i++) {
 		primes = primeFactors(x[i]);
-		for (let j = 0; j < primes.length; j++) {
-			/*for each prime number, try to find it
-			in some storage... if it's not there, include it.
-			After this, count how many times this prime number
-			is found in 'primes' with a counter, then add that
-			number to the storage... need a key/value pair? */
-			if (!container.includes(primes[j])) {
-				container.push(primes[j]);
-			}
-
-			if (primes[j] == primes[j-1]) {
-				counter += 1;
-			} else {
-				counter = 1;
-			}
-			//HELP
-		}
 	}
 
-
-	console.log(container);
+	for (let i = 0; i < primes.length; i++) {
+		for (let j = 0; j < primes[i].length; j++) {
+			if ()
+		}
+	}
 }
 
 function problem4() {
