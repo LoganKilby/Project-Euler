@@ -84,8 +84,6 @@ function palindrome_3() {
 			//getting prime factors from problem #3 function
 			container = primeFactors(parseInt(selected_array.join(""), 10));
 
-			//start doing math to see if can be multiplied by two three digit integers
-
 			//palindrome is prime
 			if (container.length == 1) {
 				console.log("Palindrome is prime") //continue search
@@ -132,30 +130,127 @@ function palindrome_3() {
 //Problem #5:
 //2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
 //What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
-function LCM_PFM(x) {
-	//todo: Need to handle array and single integer arguments
-	//Using prime factor method because I have a function to factor primes:
-	let primes;
+function LCM(x) {
+	//Using four seperate arrays seems ghetto, but maybe not... idk
+
+	let primes = [];
 	let container = [];
-
-	if (Array.isArray(x)) {
-		console.log("Array received");
+	let container_check = [];
+	let input = [];
+	let counter;
+	
+	//need to pass primeFactors() an array
+	if (!Array.isArray(x)) {
+		for (let i of arguments) {
+			input.push(i);
+		}
 	} else {
-		console.log("Error, please pass LCM an array");
-		return;
+		input = x;
 	}
 
-	for (let i = 0; i < x.length; i++) {
-		primes = primeFactors(x[i]);
+	for (let i of input) {
+		primes.push(primeFactors(i));
 	}
 
+//1. using container array to keep track of which prime factors are included
 	for (let i = 0; i < primes.length; i++) {
 		for (let j = 0; j < primes[i].length; j++) {
-			if ()
+			if(!container.includes(primes[i][j])) {
+				container.push(primes[i][j]);
+				//initialize array to be mapped to
+				container_check.push(0);
+			}
 		}
 	}
+
+//2. looping through all the prime factor arrays to determine the max number of each included factor
+	for (let i = 0; i < container.length; i++) {
+		for (let j = 0; j < primes.length; j++) {
+			counter = 0;
+			for (let k = 0; k < primes[j].length; k++) {
+				//container[i] is a prime... check primes[j] for match; keep track and update
+				if (primes[j][k] == container[i]) {
+					counter++;
+				}
+			}
+			if (counter > container_check[i]) {
+				container_check[i] = counter;
+			}
+		}
+	}
+
+	for (let i = 0; i < container.length; i++) {
+		container_check[i] = container[i] ** container_check[i];
+	}
+
+	console.log(container_check.reduce((x, y) => x * y));
+	return container_check.reduce((x, y) => x * y);
 }
 
-function problem4() {
+//Problem #6
+//Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+function difference_of_squares() {
+	// let input = [];
+	// if (!Array.isArray(x)) {
+	// 	for (let i of arguments) {
+	// 	input.push(i);
+	// 	}
+	// } else {
+	// 	input = x;
+	// }
+	let input = [];
+	for (let i = 1; i < 101; i++) {
+		input.push(i);
+	}
 
+	let sum_of_squares = input.reduce((x, y) => x + y ** 2);
+	
+	let sum = input.reduce((x, y) => x + y);
+	let square_of_sum = sum ** 2;
+
+	let difference = square_of_sum - sum_of_squares;
+
+	console.log(sum_of_squares, "sum of squares");
+	console.log(square_of_sum, "square of sum");
+	console.log(difference, "difference of squares");
+}
+
+//Problem #7
+function generate_primes(x) {
+	//stepping through numbers
+	//todo: redesign?
+	let range = x;
+	let marker = false;
+	let array = [];
+	let primes = [];
+
+	//initialize array
+	for (let i = 1; i < x; i++) {
+		array.push(i);
+	}
+
+	//removing 1 from the array
+	array.shift();
+
+	//while (array.length < x) {
+	for (let i = array[0]; i < array.length; i++) {
+		console.log("looping");
+		array = array.filter(function(x) {
+			if (x % i !== 0 || x == i) {
+				return x;
+			}
+		});
+	}
+
+	//adding new batch of numbers to array?
+	if (array.length < x) {
+
+	} else {
+		console.log(array);
+		return array[x - 1];
+	}
+	console.log(array);			
+	//}
+	
+	
 }
