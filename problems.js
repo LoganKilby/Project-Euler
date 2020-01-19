@@ -232,25 +232,28 @@ function generate_primes(x) {
 	//removing 1 from the array
 	array.shift();
 
-	//while (array.length < x) {
-	for (let i = array[0]; i < array.length; i++) {
-		console.log("looping");
-		array = array.filter(function(x) {
-			if (x % i !== 0 || x == i) {
-				return x;
+	while (!marker) {
+		for (let i = array[0]; i < array.length; i++) {
+			console.log("looping");
+			array = array.filter(function(x) {
+				if (x % i !== 0 || x == i) {
+					return x;
+				}
+			});
+		}
+
+		if (array.length > x) {
+			console.log(array);
+			marker = true;
+		}
+
+		//adding new batch of numbers to array... does this terminate?
+		if (array.length < x) {
+			let i = array[array.length - 1] + 1;
+			for (i; i < x + 100; i++) {
+				array.push(i);
 			}
-		});
-	}
+		}
 
-	//adding new batch of numbers to array?
-	if (array.length < x) {
-
-	} else {
-		console.log(array);
-		return array[x - 1];
 	}
-	console.log(array);			
-	//}
-	
-	
 }
