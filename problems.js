@@ -199,7 +199,7 @@ function difference_of_squares() {
 	// 	input = x;
 	// }
 	let input = [];
-	for (let i = 1; i < 101; i++) {
+	for (let i = 1; i < x * 2; i++) {
 		input.push(i);
 	}
 
@@ -219,13 +219,13 @@ function difference_of_squares() {
 function generate_primes(x) {
 	//stepping through numbers
 	//todo: redesign?
-	let range = x;
 	let marker = false;
 	let array = [];
 	let primes = [];
+	const batch = x * 2;
 
 	//initialize array
-	for (let i = 1; i < x; i++) {
+	for (let i = 1; i < batch; i++) {
 		array.push(i);
 	}
 
@@ -234,7 +234,6 @@ function generate_primes(x) {
 
 	while (!marker) {
 		for (let i = array[0]; i < array.length; i++) {
-			console.log("looping");
 			array = array.filter(function(x) {
 				if (x % i !== 0 || x == i) {
 					return x;
@@ -247,13 +246,15 @@ function generate_primes(x) {
 			marker = true;
 		}
 
-		//adding new batch of numbers to array... does this terminate?
+		//adding new batch of numbers to array
 		if (array.length < x) {
-			let i = array[array.length - 1] + 1;
-			for (i; i < x + 100; i++) {
+			const num = array[array.length - 1] + 1;
+			for (let i = num; i < num + batch; i++) {
 				array.push(i);
 			}
+			console.log("added " + (num + batch) + " numbers");
 		}
-
 	}
+
+	console.log(x + "'th prime = " + array[x - 1]);
 }
